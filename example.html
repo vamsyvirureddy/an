@@ -1,0 +1,50 @@
+
+<!DOCTYPE html>
+<html ng-app="myInsured">
+<head>
+<title>webpage</title>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-rc.0/angular.min.js"></script>
+<link rel="stylesheet" href="text.css">
+
+</head>
+<body ng-controller="insuredCtrl">
+ <div id="big_wrapper">
+<header id="top_header">
+<h1>UX Society Members</h1>
+</header>
+<nav id="top_nav">
+<input type="text" name="search" placeholder="Search..">
+</nav>
+<div id="new_div">
+<section id="main_section">
+<table id="table" border="1">
+<tr>
+<th>Name</th>
+<th>Occupation</th>
+<th>Company</th>
+</tr>
+<tr class="selected" ng-repeat="indivisual in members">
+<td>{{ indivisual.firstName }}{{indivisual.middleInitial }}{{indivisual.surname}}</td>
+<td>{{ indivisual.occupation }}</td>
+<td>{{indivisual.company}}
+</tr>
+</table>
+<input type="button" name="OK" class="ok" value="OK"/>
+</section>
+<script type="text/javascript">
+var myInsured = angular.module('myInsured', []);
+myInsured.controller('insuredCtrl', function($scope, $http) {
+$http.get("insured.json").success(function (response) {
+/*After Successfully fetch the data from JSON file assigning these data to $scope object variable*/
+$scope.members = response.insureds;
+});
+});
+</script>
+<aside id="side_news">
+<p>person selected</p>
+
+</aside>
+</div>
+</div>
+</body>
+</html>
